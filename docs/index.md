@@ -171,7 +171,7 @@ GA-checkpoint multimodal post-training recipe with stage-local container builds 
 :link: nemotron/embed/README
 :link-type: doc
 
-Fine-tune Llama-Nemotron-Embed-1B-v2 on domain-specific data with synthetic data generation, evaluation, and NIM deployment.
+Fine-tune Nemotron text and multimodal embedding models with synthetic data generation, retrieval evaluation, and NIM or vLLM deployment.
 
 **Stages:** SDG → Data Prep → Finetune → Eval → Export → Deploy
 :::
@@ -180,7 +180,7 @@ Fine-tune Llama-Nemotron-Embed-1B-v2 on domain-specific data with synthetic data
 :link: nemotron/rerank/README
 :link-type: doc
 
-Fine-tune Llama-Nemotron-Rerank-1B-v2 cross-encoders for domain-specific reranking with synthetic data generation, evaluation, export, and NIM deployment.
+Train text and multimodal cross-encoder rerankers. The Llama recipe includes synthetic data generation, evaluation, export, and NIM deployment.
 
 **Stages:** SDG → Data Prep → Finetune → Eval → Export → Deploy
 :::
@@ -338,7 +338,7 @@ Nemotron 3 Omni <nemotron/omni3/README.md>
 Nemotron 3 Super <nemotron/super3/README.md>
 Nemotron 3.5 Super <nemotron/super35/README.md>
 Nemotron 3 Ultra <nemotron/ultra3/README.md>
-Llama Nemotron Embed <nemotron/embed/README.md>
+Embedding Fine-Tuning <nemotron/embed/README.md>
 Llama Nemotron Rerank <nemotron/rerank/README.md>
 nemotron/artifacts.md
 ```
