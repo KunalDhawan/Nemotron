@@ -177,6 +177,8 @@ Because these are complete systems, you can extract specific techniques with con
 | **[Nemotron 3 Nano](docs/nemotron/nano3/README.md)** | 31.6B total / 3.6B active MoE Hybrid Mamba-Transformer for agentic reasoning | Pretrain → SFT → RL | [Training Guide](docs/nemotron/nano3/README.md) |
 | **[Nemotron 3.5 Lightning](docs/nemotron/lightning35/README.md)** | 30B total / 3B active hybrid Mamba-Transformer MoE with Multi-Token Prediction | Pretrain → SFT → RL → Quantization | [Training Guide](docs/nemotron/lightning35/README.md) |
 | **[Nemotron 3 Nano Omni](docs/nemotron/omni3/README.md)** | 30B total / 3B active hybrid Mamba-Transformer MoE — native text, image, video, and audio for agentic multimodal perception | SFT → RL (MPO / text / vision) → Eval | [Training Guide](docs/nemotron/omni3/README.md) |
+| **[Nemotron Embed](docs/nemotron/embed/index.md)** | Fine-tune text and multimodal embedding models for domain-specific retrieval | SDG → Data Prep → Finetune → Eval → Export (Llama only) → Deploy | [Training Guide](docs/nemotron/embed/index.md) |
+| **[Nemotron Rerank](docs/nemotron/rerank/index.md)** | Fine-tune text and multimodal rerankers to score and reorder retrieved documents | SDG → Data Prep → Finetune → Eval → Export (Llama only) → Deploy | [Training Guide](docs/nemotron/rerank/index.md) |
 
 ### Nemotron 3 Ultra
 

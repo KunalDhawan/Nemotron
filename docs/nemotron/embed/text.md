@@ -1,12 +1,20 @@
-# Embedding Model Fine-Tuning Recipe
+# Fine-Tune Embeddings on Text Data
 
-Adapt an embedding model to your domain-specific data, then evaluate and deploy it with this complete six-stage pipeline.
+<a id="embedding-model-fine-tuning-recipe"></a>
+
+Adapt an embedding model for text retrieval in your domain, then evaluate and
+deploy it. The command examples in this guide use the `nemotron-3` and `llama`
+profiles. For all supplied profiles, refer to [Nemotron Embedding Fine-Tuning](index.md).
+
+Nemotron 3.5 also supports text-only retrieval. For its `nemotron-3.5` profile,
+follow the [Nemotron 3.5 workflow](multimodal.md); images are optional. Choose a
+profile that supplies the model's runtime settings and artifact contracts.
 
 ## Choose a Model Profile
 
 | Profile | Model | Input and Guide |
 | --- | --- | --- |
-| `nemotron-3.5` | [Nemotron 3.5 Embed 1B BF16](https://huggingface.co/nvidia/Nemotron-3.5-Embed-1B-BF16) | Text and image files; follow [Fine-Tune Multimodal Embeddings](multimodal.md) |
+| `nemotron-3.5` | [Nemotron 3.5 Embed 1B BF16](https://huggingface.co/nvidia/Nemotron-3.5-Embed-1B-BF16) | Text-only, image-only, or paired documents; follow the [Nemotron 3.5 workflow](multimodal.md) |
 | `nemotron-3` | Nemotron 3 Embed 1B BF16 | Text; follow this page |
 | `llama` | Llama Nemotron Embed 1B v2 | Text; use `-c llama` through export and deployment |
 
@@ -15,19 +23,25 @@ The `nemotron-3` profile replaces the former `default` profile. Update
 `config/nemotron-3.yaml`. Model settings and artifact paths are unchanged.
 Omitting `-c` still selects `nemotron-3`; use an explicit profile in scripts.
 
-For Nemotron 3.5, start with `source_directory.path=./documents`. The recipe
+With `-c nemotron-3.5`, start with `source_directory.path=./documents`. The recipe
 prepares source records automatically. Use explicit JSONL when you need custom
 units, text/image pairs, or page relationships. The [data reference](data-reference.md)
 and [SDG reference](sdg-reference.md) describe the multimodal contract.
 
-The remaining instructions on this page describe the text profiles. Nemotron
-3.5 preparation, training, and checkpoint evaluation require local execution;
-its consolidated checkpoint deploys directly through vLLM without Stage 4.
+The remaining instructions describe the `nemotron-3` and `llama` examples.
+The `nemotron-3.5` profile requires local preparation, training, and checkpoint
+evaluation; its consolidated checkpoint deploys through vLLM without Stage 4.
 Carry the selected profile and `artifact_root` through every stage.
+
+For a first run, [check the prerequisites](#prerequisites),
+[install the CLI](#installation), and [prepare your corpus](#preparing-your-corpus).
+Then follow the [quick start](#quick-start).
 
 ## Overview
 
-This recipe fine-tunes the Nemotron 3 Embed checkpoint for domain-specific retrieval and deploys the resulting checkpoint with Retriever NIM or vLLM.
+This workflow generates text question-and-answer training data, mines hard
+negatives, fine-tunes an embedding model, and evaluates retrieval quality.
+The selected profile determines the checkpoint and deployment path.
 
 ### Why Fine-Tune Embedding Models?
 
@@ -572,7 +586,7 @@ All ordinary fields can still be overridden on the command line:
 nemotron embed finetune -c nemotron-3 num_epochs=1 learning_rate=2e-5
 ```
 
-### Sequence length
+### Sequence Length
 
 Mining, training, and evaluation use 512 tokens. The default NIM profile uses
 the selected image's runtime limit. Set `max_seq_len: 512` to enforce the same
@@ -651,9 +665,9 @@ Model: fine-tuned
 | Component | Purpose | Repository |
 |-----------|---------|------------|
 | Data Designer retrieval SDG plugin | Generate synthetic question-and-answer pairs and convert them to training data | [Plugin source](https://github.com/NVIDIA-NeMo/DataDesignerPlugins/tree/main/plugins/data-designer-retrieval-sdg) |
-| Automodel | Embedding model training framework | [GitHub](https://github.com/NVIDIA/NeMo-Automodel) |
+| Automodel | Embedding model training framework | [GitHub](https://github.com/NVIDIA-NeMo/Automodel) |
 | BEIR | Evaluation framework for information retrieval | [GitHub](https://github.com/beir-cellar/beir) |
-| NeMo Export-Deploy | ONNX/TensorRT export for optimized inference | [GitHub](https://github.com/NVIDIA/NeMo-Export-Deploy) |
+| NeMo Export-Deploy | ONNX/TensorRT export for optimized inference | [GitHub](https://github.com/NVIDIA-NeMo/Export-Deploy) |
 | NVIDIA NIM | Production inference microservice with custom model support | [Developer Site](https://developer.nvidia.com/nim) |
 
 <a id="default-model-profile"></a>
@@ -1076,7 +1090,7 @@ Typical results on enterprise domains show **+5 to +20 absolute points of nDCG@1
 ## Further Reading
 
 - [NeMo Data Designer](https://github.com/NVIDIA-NeMo/DataDesigner) - Synthetic data generation framework
-- [Automodel](https://github.com/NVIDIA/NeMo-Automodel) - Model training framework
+- [Automodel](https://github.com/NVIDIA-NeMo/Automodel) - Model training framework
 - [BEIR Benchmark](https://github.com/beir-cellar/beir) - Information retrieval evaluation
 - [NVIDIA NIM Documentation](https://developer.nvidia.com/nim) - Production inference microservices
 - [Retrieval-Synthetic-NVDocs-v1 Dataset](https://huggingface.co/datasets/nvidia/Retrieval-Synthetic-NVDocs-v1) - Pre-generated synthetic retrieval dataset on NVIDIA content
@@ -1087,11 +1101,3 @@ For issues, questions, or contributions:
 - **Issues**: [GitHub Issues](https://github.com/NVIDIA-NeMo/Nemotron/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/NVIDIA-NeMo/Nemotron/discussions)
 - **Documentation**: [Nemotron Documentation](https://docs.nvidia.com/nemotron/latest)
-
-```{toctree}
-:hidden:
-
-multimodal
-data-reference
-sdg-reference
-```

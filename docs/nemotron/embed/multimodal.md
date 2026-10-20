@@ -3,8 +3,11 @@
 Use `nemotron-3.5` to fine-tune the public
 [Nemotron 3.5 Embed 1B BF16 checkpoint](https://huggingface.co/nvidia/Nemotron-3.5-Embed-1B-BF16)
 for text queries over text, images, or paired documents. This guide takes you
-from a directory of text and image files to a mined training set, a consolidated
-checkpoint, and a base-versus-fine-tuned retrieval comparison.
+from a directory of text files, images, or both to a mined training set, a
+consolidated checkpoint, and a base-versus-fine-tuned retrieval comparison.
+Images are optional; text-only directories use the same workflow.
+
+For model selection and other workflows, refer to [Nemotron Embedding Fine-Tuning](index.md).
 
 The profile uses `output/embed/nemotron-3.5` by default. To continue an existing
 run, pass its original `artifact_root` to every stage.
@@ -309,7 +312,7 @@ The script removes only the serving container it creates.
 
 Add `--rerank --rerank-gpus 0,1` to exercise full 8B reranker checkpoint saving
 and resume with the production writer. Provision GPU and host memory as described
-in the [reranker guide](../rerank/README.md#fine-tune-nemotron-35-rerank-8b-on-image-documents).
+in the [reranker guide](../rerank/multimodal.md#checkpoint-resources).
 Reserve approximately 160 GiB for two full reranker checkpoints, plus model
 caches, embedding outputs, and other data. The script does not delete checkpoints.
 
@@ -348,4 +351,4 @@ For agent-assisted work, use the `nemotron-retrieval-recipes` skill and provide
 the directory, model profile, artifact root, available GPUs, approved endpoints,
 and intended stopping point. Ask for resolved configuration and a bounded run
 before scaling; retain commands, artifact paths, and evaluation results. For
-Nemotron 3.5 reranking, use the separate [Stage 2 reranker guide](../rerank/README.md#fine-tune-nemotron-35-rerank-8b-on-image-documents).
+Nemotron 3.5 reranking, use the separate [Stage 2 reranker guide](../rerank/multimodal.md#checkpoint-resources).

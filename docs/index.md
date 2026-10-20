@@ -167,8 +167,8 @@ GA-checkpoint multimodal post-training recipe with stage-local container builds 
 **Stages:** SFT → RL MPO → RL text → RL vision → Eval
 :::
 
-:::{grid-item-card} Embedding Fine-Tuning
-:link: nemotron/embed/README
+:::{grid-item-card} Nemotron Embed
+:link: nemotron/embed/index
 :link-type: doc
 
 Fine-tune Nemotron text and multimodal embedding models with synthetic data generation, retrieval evaluation, and NIM or vLLM deployment.
@@ -176,8 +176,8 @@ Fine-tune Nemotron text and multimodal embedding models with synthetic data gene
 **Stages:** SDG → Data Prep → Finetune → Eval → Export → Deploy
 :::
 
-:::{grid-item-card} Reranking Fine-Tuning
-:link: nemotron/rerank/README
+:::{grid-item-card} Nemotron Rerank
+:link: nemotron/rerank/index
 :link-type: doc
 
 Train text and multimodal cross-encoder rerankers. The Llama recipe includes synthetic data generation, evaluation, export, and NIM deployment.
@@ -209,8 +209,8 @@ Each recipe family has its own stage layout, and all of them can be tracked thro
 | [Super3](nemotron/super3/README.md) | Pretraining → SFT → RL → Quantization → Eval |
 | [Super35](nemotron/super35/README.md) | Pretraining → SFT → RLVR → Teachers → MOPD → Eval |
 | [Ultra3](nemotron/ultra3/README.md) | Pretraining → SFT → RLVR → MOPD |
-| [Embed](nemotron/embed/README.md) | SDG → Data Prep → Finetune → Eval → Export → Deploy |
-| [Rerank](nemotron/rerank/README.md) | SDG → Data Prep → Finetune → Eval → Export → Deploy |
+| [Embed](nemotron/embed/index.md) | SDG → Data Prep → Finetune → Eval → Export (Llama profile only) → Deploy |
+| [Rerank](nemotron/rerank/index.md) | SDG → Data Prep → Finetune → Eval → Export (Llama profile only) → Deploy |
 
 ## Why Nemotron?
 
@@ -338,8 +338,8 @@ Nemotron 3 Omni <nemotron/omni3/README.md>
 Nemotron 3 Super <nemotron/super3/README.md>
 Nemotron 3.5 Super <nemotron/super35/README.md>
 Nemotron 3 Ultra <nemotron/ultra3/README.md>
-Embedding Fine-Tuning <nemotron/embed/README.md>
-Llama Nemotron Rerank <nemotron/rerank/README.md>
+Nemotron Embed <nemotron/embed/index.md>
+Nemotron Rerank <nemotron/rerank/index.md>
 nemotron/artifacts.md
 ```
 
